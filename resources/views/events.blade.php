@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('style')
+	<link href = "{{asset('css/cell.css')}}" rel = "stylesheet">
+@endsection
 @section('header')
 	Events
 @endsection
@@ -36,13 +39,7 @@
 	</form>
 	<table class = "table table-striped table-bordered table-hover">
 		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Date</th>
-				<th>Time</th>
-				<th>Likes</th>
-			</tr>
+			@include('shared.event_thead')
 		</thead>
 		<tbody id = "main-table">
 		</tbody>

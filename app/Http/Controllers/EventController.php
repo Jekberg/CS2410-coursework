@@ -56,9 +56,15 @@ class EventController extends Controller
 	 */
 	public function getAll(Request $request)
 	{
+		$events = Event::where('name', 'LIKE', '%'.$request->input('query').'%')
+				->get();
+		foreach($events as $event)
+		{
+			$event->name = htmlspecialchars($event->name);
+			$event->description = htmlspecialchars($event->description);
+		}
 		return response()->json([
-				'responseText' => Event::where('name', 'LIKE', '%'.$request->input('query').'%')
-				->get()
+				'responseText' => $events
 				->toJson()
 		]);
 	}

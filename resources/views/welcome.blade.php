@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('style')
+	<link href = "{{asset('css/cell.css')}}" rel = "stylesheet">
+@endsection
 @section('header')
 	Events I like
 @endsection
@@ -9,21 +12,15 @@
 		</span>
 	@else
 		<table class = "table table-striped table-bordered table-hover">
-			<thead>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Date</th>
-				<th>Time</th>
-				<th>Likes</th>
-			</thead>
+			@include('shared.event_thead')
 			<tbody id = "main-table">
 				@foreach (Session::get('likes') as $id => $event)
 					<tr value = "{{$id}}">
-						<td>{{$event->name}}</td>
-						<td>{{$event->description}}</td>
-						<td>{{$event->date}}</td>
-						<td>{{$event->time}}</td>
-						<td>{{$event->likes}}</td>
+						<td class = "text-truncate cell-l">{{$event->name}}</td>
+						<td class = "text-truncate cell-l">{{$event->description}}</td>
+						<td class = "text-truncate cell-l">{{$event->date}}</td>
+						<td class = "text-truncate cell-m">{{$event->time}}</td>
+						<td class = "text-truncate cell-s">{{$event->likes}}</td>
 					</tr>
 				@endforeach
 			</tbody>

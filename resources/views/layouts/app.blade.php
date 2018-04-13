@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	@yield('style')
 </head>
 @if (!Session::has('likes'))
 	{{Session::put('likes', array())}}
@@ -39,7 +40,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 						<li>
-							<a  class = "nav-link" href = {{route('list.events')}}>Events</a>
+							<a class = "nav-link" href = {{route('list.events')}}>Events</a>
+						</li>
+						<li>
+							<a class = "nav-link" href = {{route('about')}}>About</a>
 						</li>
                     </ul>
 
@@ -54,8 +58,16 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class = "dropdown-item" href = "{{route('home')}}">
+		                                	{{ __('Home') }}
+		                            </a>
+									<a class = "dropdown-item" href = "{{route('new.event')}}">
+		                                	{{ __('New event') }}
+		                            </a>
+									<a class = "dropdown-item" href = "{{route('home')}}">
+		                                	{{ __('My page') }}
+		                            </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -79,19 +91,17 @@
             </div>
         </nav>
         <main class="py-4">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class = "col-xs-12 col-md-8">
-						<div class = "card">
-							<div class = "card-header">
-								@yield('header')
-							</div>
-							<div class = "card-body">
-								@yield('content')
-							</div>
-							<div class = "card-footer">
-								@yield('footer')
-							</div>
+			<div class = "container">
+				<div class="justify-content-center">
+					<div class = "card">
+						<div class = "card-header">
+							@yield('header')
+						</div>
+						<div class = "card-body">
+							@yield('content')
+						</div>
+						<div class = "card-footer">
+							@yield('footer')
 						</div>
 					</div>
 				</div>

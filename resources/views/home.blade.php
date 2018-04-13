@@ -1,24 +1,27 @@
 @extends('layouts.app')
+@section('style')
+	<link href = "{{asset('css/cell.css')}}" rel = "stylesheet">
+@endsection
 @section('header')
-	Dashboard
+	My events
 @endsection
 @section('content')
-	@if (session('status'))
-		<div class="alert alert-success">
-			{{session('status')}}
-		</div>
-	@endif
-	<div class = "container">
-		<div class = "row my-4">
-			<button class = "btn btn-default btn-block">My events</button>
-		</div>
-		<div class = "row my-4">
-			<button class = "btn btn-default btn-block">My profile</button>
-		</div>
-		<div class = "row my-4">
-			<div class = "btn-group btn-group-justified">
-				<a class = "btn btn-primary btn-block" href = "#">Logout</a>
-			</div>
-		</div>
-	</div>
+	<table class = "table table-striped table-bordered table-hover">
+			@include('shared.event_thead')
+		<tbody id = "main-table">
+			@foreach (Auth::user()->events as $id => $event)
+				<tr value = "{{$event->id}}">
+					<td class = "text-truncate cell-l">{{$event->name}}</td>
+					<td class = "text-truncate cell-l">{{$event->description}}</td>
+					<td class = "text-truncate cell-l">{{$event->date}}</td>
+					<td class = "text-truncate cell-m">{{$event->time}}</td>
+					<td class = "text-truncate cell-s">{{$event->likes}}</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
+@endsection
+@section('js')
+	@include('shared.routing_util')
+	<script src = "{{asset('js/view_main_table.js')}}"></script>
 @endsection
