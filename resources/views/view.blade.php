@@ -5,40 +5,35 @@
 @section('content')
 	<div class = "container">
 		<div class = "row">
-			<div class = "col-8">
-				<div class = "container">
-					<div class = "row">
-						{{$event->description}}
-					</div>
-				</div>
+			<div class = "col-6">
+				<label for = "like-counter">Likes:</label>
+				<span id = "like-count">{{$event->likes}}</span>
 			</div>
-			<div class = "col-4">
-				<div class = "container">
-					@if (Auth::check() && Auth::user()->id == $event->user_id)
-						<button class = "col-12 btn btn-success">Edit</button>
-					@else
-						<div class = "row">
-							<label for = "like-count">Likes:</label>
-							<span id = "like-count" class = "mx-auto">{{$event->likes}}</span>
-						</div>
-						<div class = "row">
-							@if (!array_key_exists($event->id, Session::get('likes')))
-								<form class = "col-12" action = "{{route('like.event')}}" method = "POST">
-									@csrf
-									<input name = "id" type = "hidden" value = "{{$event->id}}">
-									<input class = "form-control btn btn-primary" type = "submit" value = "Like">
-								</form>
-							@else
-								<form class = "col-12" action = "{{route('unlike.event')}}" method = "POST">
-									@csrf
-									<input name = "id" type = "hidden" value = "{{$event->id}}">
-									<input class = "form-control btn btn-secondary" type = "submit" value = "Unlike">
-								</form>
-							@endif
-						</div>
-					@endif
-				</div>
+			<div class = "col-6">				
+				@if (Auth::check() && Auth::user()->id == $event->user_id)
+					<button class = "col-12 btn btn-success">Edit</button>
+				@elseif (!array_key_exists($event->id, Session::get('likes')))
+					<form class = "col-12" action = "{{route('like.event')}}" method = "POST">
+						@csrf
+						<input name = "id" type = "hidden" value = "{{$event->id}}">
+						<input class = "form-control btn btn-primary" type = "submit" value = "Like">
+					</form>
+				@else
+					<form class = "col-12" action = "{{route('unlike.event')}}" method = "POST">
+						@csrf
+						<input name = "id" type = "hidden" value = "{{$event->id}}">
+						<input class = "form-control btn btn-secondary" type = "submit" value = "Unlike">
+					</form>
+				@endif
 			</div>
+		</div>
+		<div>
+			<p>
+				<h4>Description:</h4>
+			</p>
+			<p>
+				{{$event->description}}
+			</p>
 		</div>
 		<div class = "row card">
 			<div id="event-img-carousel" class="carousel slide my-100" data-ride="carousel">

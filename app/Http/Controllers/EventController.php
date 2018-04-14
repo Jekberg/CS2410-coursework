@@ -23,7 +23,7 @@ class EventController extends Controller
 	 */
 	public function lookFor(Request $request)
 	{
-		return view('events', array('events' => Event::all()));
+		return view('events');
 	}
 	/**
 	 * 
@@ -33,11 +33,6 @@ class EventController extends Controller
 	{
 		return view('view', array('event' => Event::find($id)));
 	}
-	public function viewImg($eid, $id)
-	{
-		$event = Event::find($id);
-		//return view('imgview', array('event' =>  event, 'img'=> 0);
-	}
 	/**
 	 * 
 	 * 
@@ -46,88 +41,5 @@ class EventController extends Controller
 	public function makeNew()
 	{
 		return view('newevent');
-	}
-	/**
-	 * 
-	 * 
-	 * 
-	 * @param $request The {@link Request} object.
-	 * @return A JSON object containing the result.
-	 */
-	public function getAll(Request $request)
-	{
-		$events = Event::where('name', 'LIKE', '%'.$request->input('query').'%')
-				->get();
-		foreach($events as $event)
-		{
-			$event->name = htmlspecialchars($event->name);
-			$event->description = htmlspecialchars($event->description);
-		}
-		return response()->json([
-				'responseText' => $events
-				->toJson()
-		]);
-	}
-	/**
-	 * 
-	 * 
-	 * 
-	 */
-	public function insertNew(Request $request)
-	{
-		$this->validate($request, array(
-				'file.*' => 'image'));
-		$event = new Event();
-		$event->category = $request->input('event-cat');
-		$event->name = $request->input('event-name');
-		$event->description = $request->input('event-desc');
-		$event->date = $request->input('event-date');
-		$event->time = $request->input('event-time');
-		$event->address = $request->input('event-address');
-		$event->postcode = $request->input('event-postcode');
-		$event->user_id = Auth::user()->id;
-		$event->save();
-		foreach($request->file as $file)
-		{
-			$img = new Image();
-			$img->name = time() . '_' . $file->hashName();
-			$img->event_id = $event->id;
-			$img->save();
-			$file->storeAs('public/uploads', $img->name);
-		}
-		return redirect()->route('view.event', array('id' => $event->id));
-	}
-	/**
-	 * 
-	 * 
-	 */
-	public function likeEvent(Request $request)
-	{
-		$event = Event::find($request->input('id'));
-		if(!array_key_exists($event->id, $request->session()->get('likes')))
-		{
-			++$event->likes;
-			$event->save();
-			$likedEvents = $request->session()->get('likes');
-			$likedEvents[$event->id] = $event;
-			$request->session()->put('likes', $likedEvents);
-		}
-		return redirect()->route('view.event', array('id' => $event->id));
-	}
-	/**
-	 * 
-	 */
-	public function unlikeEvent(Request $request)
-	{
-		$event = Event::find($request->input('id'));
-		if(array_key_exists($event->id, $request->session()->get('likes')))
-		{
-			--$event->likes;
-			$event->save();
-			$likedEvents = $request->session()->get('likes');
-			unset($likedEvents[$event->id]);
-			$request->session()->put('likes', $likedEvents);
-		}
-		return redirect()->route('view.event', array('id' => $event->id));
 	}
 }

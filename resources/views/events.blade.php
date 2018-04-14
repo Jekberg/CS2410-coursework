@@ -30,6 +30,8 @@
 		<div class = "form-group">
 			<select id = "order-select" class = "form-control">
 				<option value = "no-order">Order by none</option>
+				<option value = "name-asc">Order by name ASC</option>
+				<option value = "name-desc">Order by name DESC</option>
 				<option value = "like-asc">Order by likes ASC</option>
 				<option value = "like-desc">Order by likes DESC</option>
 				<option value = "date-asc">Order by date ASC</option>

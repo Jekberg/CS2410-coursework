@@ -13,6 +13,36 @@ const SORT_BY = {
 		return data;
 	},
 	/**
+	 * Sort the list by comparing the name of the events.
+	 */
+	"name-asc": function (data)
+	{
+		return data.sort(function (a, b)
+		{
+			if(a.name > b.name)
+				return 1;
+			else if(b.name > a.name)
+				return -1;
+			else
+				return 0;
+		});
+	},
+	/**
+	 * Sort the list by comparing the name of the events in revers order.
+	 */
+	"name-desc": function (data)
+	{
+		return data.sort(function (a, b)
+		{
+			if(a.name > b.name)
+				return -1;
+			else if(b.name > a.name)
+				return 1;
+			else
+				return 0;
+		});
+	},
+	/**
 	 * Sort the list by comparing the likes of the events.
 	 */
 	"like-asc": function (data)
