@@ -48,8 +48,8 @@
 	</table>
 @endsection
 @section('js')
-	@include('shared.api_setup')
-	@include('shared.routing_util')
+	@include('shared.js.api_setup')
+	@include('shared.js.routing_util')
 	<script src = "{{asset('js/events.js')}}"></script>
 	<script src = "{{asset('js/view_main_table.js')}}"></script>
 @endsection

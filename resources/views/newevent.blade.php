@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 	<form id = "new-event-form" action = "{{route('add.event')}}" method = "POST" enctype = "multipart/form-data">
-		@csrf
+		{{csrf_field()}}
 		@include('shared.form.event_cat')
 		@include('shared.form.event_name')
 		@include('shared.form.event_desc')

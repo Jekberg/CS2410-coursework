@@ -28,6 +28,6 @@
 	@endif
 @endsection
 @section('js')
-	@include('shared.routing_util')
+	@include('shared.js.routing_util')
 	<script src = "{{asset('js/view_main_table.js')}}"></script>
 @endsection
