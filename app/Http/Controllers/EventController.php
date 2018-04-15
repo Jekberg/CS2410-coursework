@@ -42,4 +42,13 @@ class EventController extends Controller
 	{
 		return view('newevent');
 	}
+	/**
+	 * 
+	 * 
+	 * @return The 'newevent' view.
+	 */
+	public function modify($id)
+	{
+		return view('edit', array('event' => $id));
+	}
 }

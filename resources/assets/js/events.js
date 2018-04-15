@@ -170,7 +170,6 @@ function fetchEvents(callback)
  */
 function getEvents()
 {
-	$("#main-table").html("");
 	fetchEvents(function(data)
 	{
 		insetTable(orderAndFilter(data));

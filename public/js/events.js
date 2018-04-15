@@ -10582,7 +10582,6 @@ function fetchEvents(callback) {
  * </p>
  */
 function getEvents() {
-	$("#main-table").html("");
 	fetchEvents(function (data) {
 		insetTable(orderAndFilter(data));
 	});

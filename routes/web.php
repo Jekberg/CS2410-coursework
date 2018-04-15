@@ -36,6 +36,9 @@ Route::get('/event/{id}', 'EventController@view')
 Route::middleware('auth')
 		->get('/newevent', 'EventController@makeNew')
 		->name('new.event');
+Route::middleware('auth')
+		->get('/editevent/{id}', 'EventController@modify')
+		->name('edit.event');
 Route::post('/addevent', 'EventManagmentController@create')
 		->name('add.event');
 Route::post('/like', 'LikeController@like')

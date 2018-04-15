@@ -11,7 +11,7 @@
 			</div>
 			<div class = "col-6">				
 				@if (Auth::check() && Auth::user()->id == $event->user_id)
-					<button class = "col-12 btn btn-success">Edit</button>
+					<a href = "{{route('edit.event', $event->id)}}" class = "col-12 btn btn-success">Edit</a>
 				@elseif (!array_key_exists($event->id, Session::get('likes')))
 					<form class = "col-12" action = "{{route('like.event')}}" method = "POST">
 						@csrf
@@ -60,8 +60,13 @@
 				</a>
 			</div>
 		</div>
-		<div class = "row">
+		<div>
 			<div class = "container">
+				<div class = "row">
+					<p>
+						<h4>Details:</h4>
+					</p>
+				</div>
 				<div class = "row">
 					<label for = "time">Time:</label>
 					<span id = "time" class = "mx-auto">{{$event->time}}</span>
