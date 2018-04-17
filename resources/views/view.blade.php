@@ -3,107 +3,37 @@
 	<link href = "{{asset('css/img_fluid.css')}}" rel = "stylesheet">
 @endsection
 @section('header')
-	{{$event->name}}
+	@include('shared.event.view.name')
 @endsection
 @section('content')
 	<div class = "container">
 		<div class = "row">
 			<div class = "col-6">
-				<label for = "like-counter">Likes:</label>
-				<span id = "like-count">{{$event->likes}}</span>
+				@include('shared.event.view.like_cnt')
 			</div>
 			<div class = "col-6">
 				@if (Auth::check() && Auth::user()->id == $event->user_id)
-					<a href = "{{route('edit.event', $event->id)}}" class = "col-12 btn btn-success">Edit</a>
-				@elseif (!array_key_exists($event->id, Session::get('likes')))
-					<form class = "col-12" action = "{{route('like.event')}}" method = "POST">
-						{{csrf_field()}}
-						<input name = "id" type = "hidden" value = "{{$event->id}}">
-						<input class = "form-control btn btn-primary" type = "submit" value = "Like">
-					</form>
+					@include('shared.event.view.edit_btn')
 				@else
-					<form class = "col-12" action = "{{route('unlike.event')}}" method = "POST">
-						{{csrf_field()}}
-						<input name = "id" type = "hidden" value = "{{$event->id}}">
-						<input class = "form-control btn btn-secondary" type = "submit" value = "Unlike">
-					</form>
+					@include('shared.event.view.like_btn')
 				@endif
 			</div>
 		</div>
 		<div>
-			<p>
-				<h4>Description:</h4>
-			</p>
-			<p>
-				{{$event->description}}
-			</p>
+			@include('shared.event.view.description')
 		</div>
-		<div class = "row card">
-			<div id="event-img-carousel" class="carousel slide my-100" data-ride="carousel">
-				<div class="carousel-inner " style = "height: 240px !important;">
-					<?php
-						$count = 0;
-					?>
-					@foreach($event->images as $image)
-						<?php
-							$carouselItemClass = 'carousel-item'. ($count++ == 0? ' active': '');
-						?>
-						<div class ="{{$carouselItemClass}}" >
-							<img class="img-responsive mx-auto d-block" style = "height:240px;" src = "{{asset('storage/uploads/' . $image->name)}}" style = "height = 100%;">
-						</div>
-					@endforeach
-				</div>
-				<a class="carousel-control-prev" href="#event-img-carousel" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#event-img-carousel" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
+		<div>
+			<div class = "row card">
+				@include('shared.event.view.images')
 			</div>
 		</div>
 		<div>
-			<div class = "container">
-				<div class = "row">
-					<p>
-						<h4>Details:</h4>
-					</p>
-				</div>
-				<div class = "row">
-					<label for = "time">Time:</label>
-					<span id = "time" class = "mx-auto">{{$event->time}}</span>
-				</div>
-				<div class = "row">
-					<label for = "time">Date:</label>
-					<span id = "time" class = "mx-auto">{{$event->date}}</span>
-				</div>
-				<div class = "row">
-					<label for = "address">Address:</label>
-					<span id = "address" class = "mx-auto">{{$event->address}}</span>
-				</div>
-				<div class = "row">
-					<label for = "postcode">Postcode:</label>
-					<span id = "postcode" class = "mx-auto">{{$event->postcode}}</span>
-				</div>
-			</div>
+			@include('shared.event.view.details')
 		</div>
 	</div>
 @endsection
 @section('footer')
-	<div class = "container">
-		<div class = "row">
-			<div class = "col-4">
-				Organiser: {{$event->user->name}}
-			</div>
-			<div class = "col-4">
-				Email: {{$event->user->email}}
-			</div>
-			<div class = "col-4">
-				Phone: {{$event->user->phone}}
-			</div>
-		</div>
-	</div>
+	@include('shared.event.view.organiser')
 @endsection
 @section('js')
 	<script>

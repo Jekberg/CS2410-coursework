@@ -88,12 +88,12 @@ const SORT_BY = {
 
 /**
  * Filter and sort a list of JSON events.
- * 
+ *
  * <p>
  * Filter the data based on checked check-boxes and sort the filtered list
  * according to the selected value of a drop-down menu.
  * </p>
- * 
+ *
  * @param data The list of events to filter and sort.
  * @return The filtered and sorted list of events.
  */
@@ -112,7 +112,7 @@ function orderAndFilter(data)
 }
 /**
  * Insert an array of events into the main table of the page.
- * 
+ *
  * @param tableData The array of event objects to be inserted into the main
  * 			table.
  */
@@ -133,12 +133,12 @@ function insetTable(tableData)
 }
 /**
  * Asynchronously get a list of events, and process them in a callback.
- * 
+ *
  * <p>
  * This function requires a callback function which takes one array of events
  * as a parameter.
  * </p>
- * 
+ *
  * @param callback The function to call when the fetching is successful.
  */
 function fetchEvents(callback)
@@ -162,7 +162,7 @@ function fetchEvents(callback)
 }
 /**
  * Fetch and insert events into the main table.
- * 
+ *
  * <p>
  * First clear the main table, then fetch the data and insert it into the main
  * table.

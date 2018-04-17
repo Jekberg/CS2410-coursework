@@ -25,24 +25,19 @@ class EventManagmentController extends Controller
 				'date' => 'required',
 				'time' => 'required',
 				'file.*' => 'image'));
-		$event = new Event();
-		$event->category = $request->input('category');
-		$event->name = $request->input('name');
-		$event->description = $request->input('description');
-		$event->date = $request->input('date');
-		$event->time = $request->input('time');
-		$event->address = $request->input('address');
-		$event->postcode = $request->input('postcode');
-		$event->user_id = Auth::user()->id;
-		$event->save();
+		$event = Event::create(array(
+				'category' => $request->input('category'),
+				'name' => $request->input('name'),
+				'description' => $request->input('description'),
+				'date' => $request->input('date'),
+				'time' => $request->input('time'),
+				'address' => $request->input('address'),
+				'postcode' => $request->input('postcode'),
+				'user_id' => Auth::user()->id));
 		foreach($request->file as $file)
-		{
-			$img = new Image();
-			$img->name = time() . '_' . $file->hashName();
-			$img->event_id = $event->id;
-			$img->save();
-			$file->storeAs('public/uploads', $img->name);
-		}
+			$file->storeAs('public/uploads', Image::create(array(
+					'name' => time() . $file->hashName(),
+					'event_id' => $event->id))->name);
 		return redirect()->route('view.event', array('id' => $event->id));
 	}
 	/**

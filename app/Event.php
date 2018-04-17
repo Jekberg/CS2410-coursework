@@ -11,9 +11,23 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
 	/**
+	 * The attributes which are mass assignnable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+        'name',
+		'description',
+		'date',
+		'time',
+		'address',
+		'postcode',
+		'user_id'
+    ];
+	/**
 	 * Get the {@link App\User} object which <code>$this</code> {@code Event}
 	 * object belongs to.
-	 * 
+	 *
 	 * @return The {@link App\User} which created <code>$this</code>
 	 * 			{@code Event}.
 	 */
@@ -24,7 +38,7 @@ class Event extends Model
 	/**
 	 * Get all the {@link App\Image} objects which belong to <code>$this</code>
 	 * {@code Event}.
-	 * 
+	 *
 	 * @return The {@link App\Image} which belong to <code>$this</code>
 	 * 			{@code Event}.
 	 */
