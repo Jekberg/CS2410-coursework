@@ -8,9 +8,9 @@ use App\Event;
 class EventQueryController extends Controller
 {
 	/**
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 * @param $request The {@link Request} object.
 	 * @return A JSON object containing the result.
 	 */

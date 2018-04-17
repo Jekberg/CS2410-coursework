@@ -17,8 +17,8 @@ $(document).ready(function ()
 				event.target.submit();
 			}
 		})(dateValidator.validate(
-				formElements["event-date"].value,
-				formElements["event-time"].value));
+				formElements["date"].value,
+				formElements["time"].value));
 		return false;
 	});
 });

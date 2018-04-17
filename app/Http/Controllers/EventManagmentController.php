@@ -10,22 +10,29 @@ use App\Image;
 class EventManagmentController extends Controller
 {
 	/**
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 */
 	public function create(Request $request)
 	{
 		$this->validate($request, array(
+				'category' => 'required',
+				'name' => 'unique:events',
+				'description' => 'required',
+				'address' => 'required',
+				'postcode' => 'required',
+				'date' => 'required',
+				'time' => 'required',
 				'file.*' => 'image'));
 		$event = new Event();
-		$event->category = $request->input('event-cat');
-		$event->name = $request->input('event-name');
-		$event->description = $request->input('event-desc');
-		$event->date = $request->input('event-date');
-		$event->time = $request->input('event-time');
-		$event->address = $request->input('event-address');
-		$event->postcode = $request->input('event-postcode');
+		$event->category = $request->input('category');
+		$event->name = $request->input('name');
+		$event->description = $request->input('description');
+		$event->date = $request->input('date');
+		$event->time = $request->input('time');
+		$event->address = $request->input('address');
+		$event->postcode = $request->input('postcode');
 		$event->user_id = Auth::user()->id;
 		$event->save();
 		foreach($request->file as $file)
@@ -39,9 +46,9 @@ class EventManagmentController extends Controller
 		return redirect()->route('view.event', array('id' => $event->id));
 	}
 	/**
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 */
 	public function update(Request $request)
 	{

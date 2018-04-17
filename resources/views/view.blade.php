@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('style')
+	<link href = "{{asset('css/img_fluid.css')}}" rel = "stylesheet">
+@endsection
 @section('header')
 	{{$event->name}}
 @endsection
@@ -9,7 +12,7 @@
 				<label for = "like-counter">Likes:</label>
 				<span id = "like-count">{{$event->likes}}</span>
 			</div>
-			<div class = "col-6">				
+			<div class = "col-6">
 				@if (Auth::check() && Auth::user()->id == $event->user_id)
 					<a href = "{{route('edit.event', $event->id)}}" class = "col-12 btn btn-success">Edit</a>
 				@elseif (!array_key_exists($event->id, Session::get('likes')))
@@ -37,16 +40,16 @@
 		</div>
 		<div class = "row card">
 			<div id="event-img-carousel" class="carousel slide my-100" data-ride="carousel">
-				<div class="carousel-inner">
-					<?
+				<div class="carousel-inner " style = "height: 240px !important;">
+					<?php
 						$count = 0;
 					?>
 					@foreach($event->images as $image)
-						<?
+						<?php
 							$carouselItemClass = 'carousel-item'. ($count++ == 0? ' active': '');
 						?>
 						<div class ="{{$carouselItemClass}}" >
-							<img class="d-block mx-auto my-auto" src = "{{asset('storage/uploads/' . $image->name)}}" alt="First slide">
+							<img class="img-responsive mx-auto d-block" style = "height:240px;" src = "{{asset('storage/uploads/' . $image->name)}}" style = "height = 100%;">
 						</div>
 					@endforeach
 				</div>

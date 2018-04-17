@@ -8,9 +8,16 @@ use App\Event;
 class LikeController extends Controller
 {
 	/**
-	 * 
-	 * 
-	 * @return 
+	 * Like an existing event.
+	 *
+	 * <p>
+	 * An event can only be liked if it does not exist within the session. Upon
+	 * completion, the request will be redirected to the view.event route.
+	 * </p>
+	 *
+	 * @param $request The request which was sent, containing an event ID and
+	 * 			a session.
+	 * @return The view which is returned by the view.event route.
 	 */
 	public function like(Request $request)
 	{
@@ -26,7 +33,16 @@ class LikeController extends Controller
 		return redirect()->route('view.event', array('id' => $event->id));
 	}
 	/**
-	 * 
+	 * Unlike an existing event which has already been liked.
+	 *
+	 * <p>
+	 * An event can only be unliked if it exist within the session. Upon
+	 * completion, the request will be redirected to the view.event route.
+	 * </p>
+	 *
+	 * @param $request The request which contains the event ID of the event
+	 * 			unlike, and a session.
+	 * @return The view whoich is returned by the view.event route.
 	 */
 	public function unlike(Request $request)
 	{
