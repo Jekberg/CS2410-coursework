@@ -39,8 +39,15 @@ Route::middleware('auth')
 Route::middleware('auth')
 		->get('/editevent/{id}', 'EventController@modify')
 		->name('edit.event');
-Route::post('/newevent', 'EventManagmentController@create')
+Route::middleware('auth')
+        ->post('/newevent', 'EventManagmentController@create')
 		->name('add.event');
+Route::middleware('auth')
+		->post('/editevent/{id}', 'EventManagmentController@update')
+		->name('update.event');
+Route::middleware('auth')
+		->post('/removeevent/{id}', 'EventManagmentController@delete')
+		->name('delete.event');
 Route::post('/like', 'LikeController@like')
 		->name('like.event');
 Route::post('/unlike', 'LikeController@unlike')

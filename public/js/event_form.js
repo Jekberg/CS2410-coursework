@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 27);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 1:
+/******/ ([
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10436,26 +10436,98 @@ return jQuery;
 
 
 /***/ }),
-
-/***/ 27:
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(28);
+__webpack_require__(18);
+__webpack_require__(20);
+__webpack_require__(21);
+module.exports = __webpack_require__(22);
 
 
 /***/ }),
-
-/***/ 28:
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var $ = __webpack_require__(1);
+var dateValidator = __webpack_require__(19);
 
 $(document).ready(function () {
-	$("#main-table").click(function (event) {
-		viewEvent(event.target.parentElement.getAttribute("value"));
+	$("#event-form").submit(function (event) {
+		console.log("Submitting form.");
+		var formElements = event.target.elements;
+		(function (str) {
+			if (str != null) alert(str);else {
+				$("#category-hidden").val($("#category-input").val());
+				event.target.submit();
+			}
+		})(dateValidator.validate(formElements["date"].value, formElements["time"].value));
+		return false;
 	});
 });
 
-/***/ })
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/******/ });
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["validate"] = validate;
+/**
+ * ...
+ * 
+ * @file	validate_date.js
+ * @author 	159014260 John Berg
+ * @since	31/03/2018
+ */
+/**
+ * Check if two string which represents a date and time respectively, when
+ * combined represent a date and time which is after the current date and time.
+ * 
+ * @param date The string which represents the calender date of the date to be
+ * 			validated.
+ * @param time The string which represents the time of the <code>date</code>.
+ * @return <code>null</code> if no errors are detected, otherwise, returns a
+ * 			string which describes the error.
+ */
+function validate(date, time) {
+  var d = new Date(date + "T" + time);
+  if (isNaN(d)) return "Date is not correct!";
+  return d < Date.now() ? "The time and date must be after today" : null;
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+/******/ ]);

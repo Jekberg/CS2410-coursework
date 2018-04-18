@@ -1,1 +1,12 @@
-.cell-s{max-width:70px}.cell-m{max-width:90px}.cell-l{max-width:110px}
+.cell-s {
+  max-width: 70px;
+}
+
+.cell-m {
+  max-width: 90px;
+}
+
+.cell-l {
+  max-width: 110px;
+}
+

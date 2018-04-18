@@ -2,7 +2,7 @@
 	<label for = "date-time-div">When?</label>
 	<div id = "date-time-div">
 		<div class = "form-group">
-			<input class = "form-control {{$errors->has('time')? 'is-invalid' : ''}}" name = "date" type = "date" value = "{{old('date')}}" required>
+			<input class = "form-control {{$errors->has('time')? 'is-invalid' : ''}}" name = "date" type = "date" value = "{{old('date', isset($event)? $event->date: '')}}" required>
 			@if ($errors->has('date'))
 				<span class="invalid-feedback">
 					<strong>{{$errors->first('date')}}</strong>
@@ -10,7 +10,7 @@
 			@endif
 		</div>
 		<div class = "form-group">
-			<input class = "form-control {{$errors->has('time')? 'is-invalid' : ''}}" name = "time" type = "time" value = "{{old('time')}}" required>
+			<input class = "form-control {{$errors->has('time')? 'is-invalid' : ''}}" name = "time" type = "time" value = "{{old('time', isset($event)? $event->time: '')}}" required>
 			@if ($errors->has('time'))
 				<span class="invalid-feedback">
 					<strong>{{$errors->first('time')}}</strong>

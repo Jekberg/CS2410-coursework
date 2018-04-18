@@ -3,7 +3,7 @@ const dateValidator = require("./validate_date");
 
 $(document).ready(function ()
 {
-	$("#new-event-form").submit(function (event)
+	$("#event-form").submit(function (event)
 	{
 		console.log("Submitting form.");
 		const formElements = event.target.elements;

@@ -3,7 +3,7 @@
 	New Event
 @endsection
 @section('content')
-	<form id = "new-event-form" action = "{{route('add.event')}}" method = "POST" enctype = "multipart/form-data">
+	<form id = "event-form" action = "{{route('add.event')}}" method = "POST" enctype = "multipart/form-data">
 		{{csrf_field()}}
 		@include('shared.event.form.category')
 		@include('shared.event.form.name')
@@ -20,5 +20,5 @@
 	</form>
 @endsection
 @section('js')
-	<script src = "{{asset('js/newevent.js')}}"></script>
+	<script src = "{{asset('js/event_form.js')}}"></script>
 @endsection
