@@ -19,18 +19,19 @@ class LikeController extends Controller
 	 * 			a session.
 	 * @return The view which is returned by the view.event route.
 	 */
-	public function like(Request $request)
+	public function like(Request $request, $id)
 	{
-		$event = Event::find($request->input('id'));
-		if(!array_key_exists($event->id, $request->session()->get('likes')))
+		$event = Event::find($id);
+		if(isset($event)
+				&& !in_array($event->id, $request->session()->get('likes')))
 		{
 			++$event->likes;
 			$event->save();
-			$likedEvents = $request->session()->get('likes');
-			$likedEvents[$event->id] = $event;
-			$request->session()->put('likes', $likedEvents);
+			$likes = $request->session()->get('likes');
+			array_push($likes, $event->id);
+			$request->session()->put('likes', $likes);
 		}
-		return redirect()->route('view.event', array('id' => $event->id));
+		return redirect()->route('view.event', array('id' => $id));
 	}
 	/**
 	 * Unlike an existing event which has already been liked.
@@ -44,17 +45,18 @@ class LikeController extends Controller
 	 * 			unlike, and a session.
 	 * @return The view whoich is returned by the view.event route.
 	 */
-	public function unlike(Request $request)
+	public function unlike(Request $request, $id)
 	{
-		$event = Event::find($request->input('id'));
-		if(array_key_exists($event->id, $request->session()->get('likes')))
+		$event = Event::find($id);
+		if(isset($event)
+				&& in_array($event->id, $request->session()->get('likes')))
 		{
 			--$event->likes;
 			$event->save();
-			$likedEvents = $request->session()->get('likes');
-			unset($likedEvents[$event->id]);
-			$request->session()->put('likes', $likedEvents);
+			$likes = $request->session()->get('likes');
+			unset($likes[array_search($event->id, $likes)]);
+			$request->session()->put('likes', $likes);
 		}
-		return redirect()->route('view.event', array('id' => $event->id));
+		return redirect()->route('view.event', array('id' => $id));
 	}
 }

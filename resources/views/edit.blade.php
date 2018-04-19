@@ -12,6 +12,7 @@
 		@include('shared.event.form.time')
 		@include('shared.event.form.image')
 		@include('shared.event.form.remove_image')
+		<input class = "form-control btn btn-success" type = "submit" value = "Update">
 	</form>
 	<form action = "{{route('delete.event', $event->id)}}" method = "POST">
 		<div class = "form-group mt-3" >

@@ -10455,9 +10455,9 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);
+__webpack_require__(19);
 __webpack_require__(20);
-__webpack_require__(21);
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(21);
 
 
 /***/ }),
@@ -10465,51 +10465,20 @@ module.exports = __webpack_require__(22);
 /***/ (function(module, exports, __webpack_require__) {
 
 var $ = __webpack_require__(1);
-var dateValidator = __webpack_require__(19);
 
 $(document).ready(function () {
 	$("#event-form").submit(function (event) {
 		console.log("Submitting form.");
-		var formElements = event.target.elements;
-		(function (str) {
-			if (str != null) alert(str);else {
-				$("#category-hidden").val($("#category-input").val());
-				event.target.submit();
-			}
-		})(dateValidator.validate(formElements["date"].value, formElements["time"].value));
-		return false;
+		$("#category-hidden").val($("#category-input").val());
+		return true;
 	});
 });
 
 /***/ }),
 /* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (immutable) */ __webpack_exports__["validate"] = validate;
-/**
- * ...
- * 
- * @file	validate_date.js
- * @author 	159014260 John Berg
- * @since	31/03/2018
- */
-/**
- * Check if two string which represents a date and time respectively, when
- * combined represent a date and time which is after the current date and time.
- * 
- * @param date The string which represents the calender date of the date to be
- * 			validated.
- * @param time The string which represents the time of the <code>date</code>.
- * @return <code>null</code> if no errors are detected, otherwise, returns a
- * 			string which describes the error.
- */
-function validate(date, time) {
-  var d = new Date(date + "T" + time);
-  if (isNaN(d)) return "Date is not correct!";
-  return d < Date.now() ? "The time and date must be after today" : null;
-}
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 20 */
@@ -10519,12 +10488,6 @@ function validate(date, time) {
 
 /***/ }),
 /* 21 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 22 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

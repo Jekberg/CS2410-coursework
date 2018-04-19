@@ -21,12 +21,22 @@
 					<input id = "filter-culture" class = "" name = "filter" type = "checkbox" value = "CULTURE" checked>
 				</div>
 			</div>
-			<div class = "col-4">
-				<label for = "filter-other">Other</label>
-				<input id = "filter-others" class = "" name = "filter" type = "checkbox" value = "OTHER" checked>
+				<div class = "col-4">
+					<label for = "filter-other">Other</label>
+					<input id = "filter-others" class = "" name = "filter" type = "checkbox" value = "OTHER" checked>
+				</div>
 			</div>
 		</div>
-	</div>
+		<div class = "form-group form-row">
+			<div class = "col">
+				<label for = "from-date">From:</label>
+				<input id = "from-date" class = "form-control" name = "from" type = "date">
+			</div>
+			<div class  = "col">
+				<label for = "to-date">To:</label>
+				<input id = "to-date" class = "form-control" name = "to" type = "date">
+			</div>
+		</div>
 		<div class = "form-group">
 			<select id = "order-select" class = "form-control">
 				<option value = "no-order">Order by none</option>
@@ -41,7 +51,7 @@
 	</form>
 	<table class = "table table-striped table-bordered table-hover">
 		<thead>
-			@include('shared.event_thead')
+			@include('shared.event.table.head')
 		</thead>
 		<tbody id = "main-table">
 		</tbody>

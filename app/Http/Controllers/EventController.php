@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Gate;
 use App\Event;
 use App\Image;
 
@@ -23,7 +24,8 @@ class EventController extends Controller
 	 */
 	public function lookFor(Request $request)
 	{
-		return view('events');
+		return redirect()->route('list.events', array(
+                'query' => $request->input('query')));
 	}
 	/**
 	 *
@@ -31,7 +33,13 @@ class EventController extends Controller
 	 */
 	public function view($id)
 	{
-		return view('view', array('event' => Event::find($id)));
+        $event = Event::find($id);
+        if(isset($event))
+		      return view('view', array('event' => $event));
+        return view('error', array(
+                'message' => "The event you are looking for does not exist it "
+                        . "seems... Perhaps you are looking for something else "
+                        . "or the event has been removed by the organiser."));
 	}
 	/**
 	 *
@@ -49,6 +57,20 @@ class EventController extends Controller
 	 */
 	public function modify($id)
 	{
-		return view('edit', array('event' => Event::find($id)));
+        $event = Event::find($id);
+        if(!isset($event))
+            return view('error', array(
+                    'message' => "Looks like the event you are trying to edit "
+                            . "does not exist, maybe you are looking for "
+                            . "something else?"));
+        if(Gate::allows('event-ownership', $event))
+		      return view('edit', array('event' => $event));
+        else
+            return view("error", array(
+                    'message' => "Sorry! You cannot edit this event because "
+                                . "this event does not belong to you. Stealing"
+                                . "is not the right thing to do, but you could "
+                                . "always create your own event and edit it "
+                                . "until your heart's content! :)"));
 	}
 }

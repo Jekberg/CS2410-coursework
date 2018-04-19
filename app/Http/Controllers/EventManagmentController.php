@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Storage;
+use Gate;
 use App\Event;
 use App\Image;
 
@@ -58,39 +59,45 @@ class EventManagmentController extends Controller
 				'time' => 'required',
 				'file.*' => 'image'));
 		$event = Event::find($id);
-		if($request->input('name') != $event->name)
-			$this->validate($request, array(
-					'name' => 'unique:events'));
-		$event->category = $request->input('category');
-		$event->name = $request->input('name');
-		$event->description = $request->input('description');
-		$event->address = $request->input('address');
-		$event->postcode = $request->input('postcode');
-		$event->date = $request->input('date');
-		$event->time = $request->input('time');
-		$event->save();
-		if(isset($request->file))
-			foreach($request->file as $file)
-				$file->storeAs('public/uploads', Image::create(array(
-						'name' => time() . $file->hashName(),
-						'event_id' => $event->id))->name);
-		foreach ($event->images as $img)
-			if($request->has($img->id))
-			{
-				Storage::delete('/public/uploads' . $img->name);
-				$img->delete();
-			}
+		if(Gate::allows('event-ownership', $event))
+		{
+			if($request->input('name') != $event->name)
+				$this->validate($request, array(
+						'name' => 'unique:events'));
+			$event->category = $request->input('category');
+			$event->name = $request->input('name');
+			$event->description = $request->input('description');
+			$event->address = $request->input('address');
+			$event->postcode = $request->input('postcode');
+			$event->date = $request->input('date');
+			$event->time = $request->input('time');
+			$event->save();
+			if(isset($request->file))
+				foreach($request->file as $file)
+					$file->storeAs('public/uploads', Image::create(array(
+							'name' => time() . $file->hashName(),
+							'event_id' => $event->id))->name);
+			foreach ($event->images as $img)
+				if($request->has($img->id))
+				{
+					Storage::delete('/public/uploads' . $img->name);
+					$img->delete();
+				}
+		}
 		return redirect()->route('view.event', array('id' => $event->id));
 	}
 	public function delete(Request $request, $id)
 	{
 		$event = Event::find($id);
-		foreach($event->images as $img)
+		if(Gate::allows('event-ownership', $event))
 		{
-			Storage::delete('/public/uploads/' . $img->name);
-			$img->delete();
+			foreach($event->images as $img)
+			{
+				Storage::delete('/public/uploads/' . $img->name);
+				$img->delete();
+			}
+			$event->delete();
 		}
-		$event->delete();
-		return redirect()->url('/');
+		return redirect()->route('welcome');
 	}
 }

@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10437,18 +10437,19 @@ return jQuery;
 
 /***/ }),
 
-/***/ 23:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(23);
 
 
 /***/ }),
 
-/***/ 24:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 var $ = __webpack_require__(1);
+var urlParam = __webpack_require__(24);
 
 /**
  * The map of selectable options in a drop-down menu, and their corresponding
@@ -10563,7 +10564,9 @@ function insetTable(tableData) {
 function fetchEvents(callback) {
 	console.log("Fetching events.");
 	$.ajax(prepareGetEventsRequest({
-		query: $("#search-input").val()
+		query: $("#search-input").val(),
+		from: $("#from-date").val(),
+		to: $("#to-date").val()
 	})).done(function (data) {
 		console.log("Fetch done");
 		console.log(data);
@@ -10587,6 +10590,7 @@ function getEvents() {
 	});
 }
 $(document).ready(function () {
+	$("#search-input").val(urlParam.getURLParam('query'));
 	getEvents();
 	$("#search-bar").submit(function (event) {
 		getEvents();
@@ -10601,10 +10605,30 @@ $(document).ready(function () {
 	$("#filter-others").change(function (event) {
 		getEvents();
 	});
+	$("#from-date").change(function (event) {
+		getEvents();
+	});
+	$("#to-date").change(function (event) {
+		getEvents();
+	});
 	$("#order-select").change(function (event) {
 		getEvents();
 	});
 });
+
+/***/ }),
+
+/***/ 24:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (immutable) */ __webpack_exports__["getURLParam"] = getURLParam;
+
+
+function getURLParam(param) {
+    return new URL(window.location.href).searchParams.get(param);
+}
 
 /***/ })
 

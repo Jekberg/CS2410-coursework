@@ -11,4 +11,3 @@
         @endforeach
     </div>
 </div>
-<input class = "form-control btn btn-success" type = "submit" value = "Update">

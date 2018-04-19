@@ -1,4 +1,5 @@
 const $ = require("jquery");
+const urlParam = require("./url_param");
 
 /**
  * The map of selectable options in a drop-down menu, and their corresponding
@@ -146,7 +147,9 @@ function fetchEvents(callback)
 	console.log("Fetching events.");
 	$.ajax(prepareGetEventsRequest(
 	{
-		query: $("#search-input").val()
+		query: $("#search-input").val(),
+		from: $("#from-date").val(),
+		to: $("#to-date").val()
 	}))
 	.done(function (data)
 	{
@@ -177,6 +180,7 @@ function getEvents()
 }
 $(document).ready(function ()
 {
+	$("#search-input").val(urlParam.getURLParam('query'));
 	getEvents();
 	$("#search-bar").submit(function (event)
 	{
@@ -192,6 +196,14 @@ $(document).ready(function ()
 		getEvents();
 	});
 	$("#filter-others").change(function (event)
+	{
+		getEvents();
+	});
+	$("#from-date").change(function (event)
+	{
+		getEvents();
+	});
+	$("#to-date").change(function (event)
 	{
 		getEvents();
 	});

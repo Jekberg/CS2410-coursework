@@ -24,7 +24,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+    }
+    public function registerPolicies()
+    {
+        Gate::define('event-ownership', function ($user, $event)
+        {
+            return $user->id == $event->user_id;
+        });
     }
 }

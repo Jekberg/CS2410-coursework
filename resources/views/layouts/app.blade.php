@@ -40,10 +40,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 						<li>
-							<a class = "nav-link" href = {{route('list.events')}}>Events</a>
+							<a class = "nav-link" href = "{{route('list.events')}}">Events</a>
 						</li>
 						<li>
-							<a class = "nav-link" href = {{route('about')}}>About</a>
+							<a class = "nav-link" href = "{{route('about')}}">About</a>
 						</li>
                     </ul>
 
@@ -60,13 +60,13 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class = "dropdown-item" href = "{{route('home')}}">
-		                                	{{ __('Home') }}
+		                                	{{ __('My profile') }}
 		                            </a>
 									<a class = "dropdown-item" href = "{{route('new.event')}}">
 		                                	{{ __('New event') }}
 		                            </a>
-									<a class = "dropdown-item" href = "{{route('home')}}">
-		                                	{{ __('My page') }}
+									<a class = "dropdown-item" href = "{{route('user.events')}}">
+		                                	{{ __('My events') }}
 		                            </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

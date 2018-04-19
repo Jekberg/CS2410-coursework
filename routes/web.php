@@ -15,7 +15,8 @@ use App\Event;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})
+    ->name('welcome');
 Route::get('/about', function ()
 {
     return view('about');
@@ -40,6 +41,9 @@ Route::middleware('auth')
 		->get('/editevent/{id}', 'EventController@modify')
 		->name('edit.event');
 Route::middleware('auth')
+        ->get('/myevents', 'UserController@events')
+        ->name('user.events');
+Route::middleware('auth')
         ->post('/newevent', 'EventManagmentController@create')
 		->name('add.event');
 Route::middleware('auth')
@@ -48,7 +52,10 @@ Route::middleware('auth')
 Route::middleware('auth')
 		->post('/removeevent/{id}', 'EventManagmentController@delete')
 		->name('delete.event');
-Route::post('/like', 'LikeController@like')
+Route::post('/like/{id}', 'LikeController@like')
 		->name('like.event');
-Route::post('/unlike', 'LikeController@unlike')
+Route::post('/unlike/{id}', 'LikeController@unlike')
 		->name('unlike.event');
+Route::middleware('auth')
+        ->post('updateprofile', 'UserController@update')
+        ->name('user.update');
