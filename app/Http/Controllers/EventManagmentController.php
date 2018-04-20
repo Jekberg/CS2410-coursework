@@ -116,17 +116,17 @@ class EventManagmentController extends Controller
 			$event->date = $request->input('date');
 			$event->time = $request->input('time');
 			$event->save();
-			if(isset($request->file))
-				foreach($request->file as $file)
-					$file->storeAs('public/uploads', Image::create(array(
-							'name' => time() . $file->hashName(),
-							'event_id' => $event->id))->name);
 			foreach ($event->images as $img)
 				if($request->has($img->id))
 				{
 					Storage::delete('/public/uploads' . $img->name);
 					$img->delete();
 				}
+			if(isset($request->file))
+				foreach($request->file as $file)
+					$file->storeAs('public/uploads', Image::create(array(
+							'name' => time() . $file->hashName(),
+							'event_id' => $event->id))->name);
 		}
 		else
 			return view('error', array(
