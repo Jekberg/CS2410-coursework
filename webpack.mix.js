@@ -11,9 +11,21 @@ let mix = require('laravel-mix');
  |
  */
 
+/**
+ * The directotry containing the js files to compile.
+ */
 const SOURCE_JS = "resources/assets/js/";
+/**
+ * The directotry containing the scss files to compile.
+ */
 const SOURCE_SASS = "resources/assets/sass/";
+/**
+ * The directory to output the compiled js files to.
+ */
 const TARGET_JS = "public/js";
+/**
+ * The directory to output the compiled css files to.
+ */
 const TARGET_CSS = "public/css";
 
 mix.react(SOURCE_JS + "app.js", TARGET_JS)
