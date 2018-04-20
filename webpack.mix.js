@@ -19,8 +19,6 @@ const TARGET_CSS = "public/css";
 mix.react(SOURCE_JS + "app.js", TARGET_JS)
 	.js(SOURCE_JS + "event_form.js", TARGET_JS)
 	.js(SOURCE_JS + "events.js", TARGET_JS)
-	.js(SOURCE_JS + "view.js", TARGET_JS)
 	.js(SOURCE_JS + "view_main_table.js", TARGET_JS)
 	.sass(SOURCE_SASS + "app.scss", TARGET_CSS)
-	.sass(SOURCE_SASS + "cell.scss", TARGET_CSS)
-	.sass(SOURCE_SASS + "img_fluid.scss", TARGET_CSS);
+	.sass(SOURCE_SASS + "cell.scss", TARGET_CSS);

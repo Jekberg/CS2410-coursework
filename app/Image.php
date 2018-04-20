@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The {@code Image} class is a {@link Model} objec which represents an images
+ * in a relational database.
+ */
 class Image extends Model
 {
     /**

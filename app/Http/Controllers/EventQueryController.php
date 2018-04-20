@@ -5,11 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 
+/**
+ * The {@code EventQueryController} is a {@link Controller} which manages
+ * requests to read existing events in the events table.
+ */
 class EventQueryController extends Controller
 {
 	/**
+	 * Get the events in the events table.
 	 *
+	 * <p>
+	 *		The returned result may be affeced by the request parameters.
+	 * </p>
 	 *
+	 * <p>
+	 * 		The request may contain:
+	 * 		<ul>
+	 * 			<li>query: search name likeness.</li>
+	 * 			<li>from: earliest allowable date.</li>
+	 * 			<li>to: latest allowable date.</li>
+	 * 		</ul>
+	 * </p>
 	 *
 	 * @param $request The {@link Request} object.
 	 * @return A JSON object containing the result.

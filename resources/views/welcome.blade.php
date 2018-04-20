@@ -30,7 +30,7 @@
 						<?php
 							$likes = Session::get('likes');
 							unset($likes[array_search($id, $likes)]);
-							Session::put($id, 'likes');
+							Session::put('likes', $likes);
 						?>
 					@endif
 				@endforeach

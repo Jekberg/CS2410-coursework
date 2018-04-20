@@ -35,7 +35,7 @@ Route::get('/search', 'EventController@lookFor')
 Route::get('/event/{id}', 'EventController@view')
 		->name('view.event');
 Route::middleware('auth')
-		->get('/newevent', 'EventController@makeNew')
+		->get('/newevent', 'EventController@new')
 		->name('new.event');
 Route::middleware('auth')
 		->get('/editevent/{id}', 'EventController@modify')
@@ -52,10 +52,10 @@ Route::middleware('auth')
 Route::middleware('auth')
 		->post('/removeevent/{id}', 'EventManagmentController@delete')
 		->name('delete.event');
+Route::middleware('auth')
+        ->post('updateprofile', 'UserController@update')
+        ->name('user.update');
 Route::post('/like/{id}', 'LikeController@like')
 		->name('like.event');
 Route::post('/unlike/{id}', 'LikeController@unlike')
 		->name('unlike.event');
-Route::middleware('auth')
-        ->post('updateprofile', 'UserController@update')
-        ->name('user.update');

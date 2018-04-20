@@ -20,8 +20,21 @@
 		event organiser is fun, easy and best of all free, you will be able to create as many
 		events as you want, for anyone and everyone to enjoy.
 	</p>
+	<p><h3>Who is it for?</h3></p>
+	<p>
+		You, me, everyone and anyone,particuularly Aston students!
+	</p>
+	<p><h3>How do I use it?</h3></p>
+	<p>
+		You can search evens, like and unlike events, and even email an organiser.
+		If you are new, then you can click "events" which will show you all events which are availabe.
+		Clicking the "Aston Events" in the top left corner will show you what you have liked in the past.
+	</p>
 	<p><h3>Contact details:</h3></p>
 	<p>
-		...
+		This bit contains information about... contact info and such...
+	</p>
+	<p>
+		If you have any issues, get in touch via <a href = "mailto:bergj2@aston.ac.uk">bergj2@aston.ac.uk</a>.
 	</p>
 @endsection

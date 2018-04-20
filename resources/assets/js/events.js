@@ -122,12 +122,18 @@ function insetTable(tableData)
 	var tableContent = "";
 	$.each(tableData, function (index, data)
 	{
-		tableContent += "<tr class = 'event-tr' value = " + data.id + ">";
-		tableContent += "<td class = ' text-truncate cell-l'>" + data.name + "</td>";
-		tableContent += "<td class = ' text-truncate cell-l'>" + data.description + "</td>";
-		tableContent += "<td class = ' text-truncate cell-l'>" + data.date + "</td>";
-		tableContent += "<td class = ' text-truncate cell-m'>" + data.time + "</td>";
-		tableContent += "<td class = ' text-truncate cell-s'>" + data.likes + "</td>";
+		tableContent += "<tr class = 'event-tr' value = "
+				+ data.id + ">";
+		tableContent += "<td class = ' text-truncate cell-l'>"
+				+ data.name + "</td>";
+		tableContent += "<td class = ' text-truncate cell-l'>"
+				+ data.description + "</td>";
+		tableContent += "<td class = ' text-truncate cell-l'>"
+				+ data.date + "</td>";
+		tableContent += "<td class = ' text-truncate cell-m'>"
+				+ data.time + "</td>";
+		tableContent += "<td class = ' text-truncate cell-s'>"
+				+ data.likes + "</td>";
 		tableContent += "</tr>";
 	});
 	$("#main-table").html(tableContent);

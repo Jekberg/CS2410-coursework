@@ -26,6 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /**
+     * Get the {@link App\Event} objects which <code>$this</code> {@code User}
+     * owns.
+     *
+     * @return The {@link App\Event} objects which <code>$this</code>
+     *          {@code User} object owns.
+     */
 	public function events()
 	{
 		return $this->hasMany('App\Event');

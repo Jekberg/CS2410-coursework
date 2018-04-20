@@ -1,1 +1,3 @@
-<a href = "{{route('edit.event', $event->id)}}" class = "col-12 btn btn-success">Edit</a>
+<form class = "col-12">
+    <a href = "{{route('edit.event', $event->id)}}" class = "form-control btn btn-success">Edit</a>
+</form>
