@@ -4,6 +4,5 @@
     "/css/app.css": "/css/app.css",
     "/css/cell.css": "/css/cell.css",
     "/js/events.js": "/js/events.js",
-    "/js/view_main_table.js": "/js/view_main_table.js",
-    "/js/view.js": "/js/view.js"
+    "/js/view_main_table.js": "/js/view_main_table.js"
 }
